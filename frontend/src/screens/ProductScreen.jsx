@@ -2,18 +2,24 @@ import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import { BsChevronLeft } from 'react-icons/bs'
 import Rating from '../components/Rating'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 
 export default function ProductScreen() {
   const { id: productId } = useParams()
-  const { data: product, isLoading, isError } = useGetProductDetailsQuery(productId)
+  const { data: product, isLoading, isError, error } = useGetProductDetailsQuery(productId)
 
   let content = null
   if (isLoading) {
-    content = <h2>Loading...</h2>
+    content = <Loader />
   }
   if (isError) {
-    content = <h2>Error... Could not fetch data for this product</h2>
+    content = (
+      <Message variant='danger'>
+        {error?.data?.message || error.error}
+      </Message>
+    )
   }
   if (!isLoading && !isError && product) {
     const { name, image, rating, numReviews, price, description, countInStock } = product
