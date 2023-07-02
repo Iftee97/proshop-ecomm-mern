@@ -1,8 +1,8 @@
 import { Row, Col } from 'react-bootstrap'
+import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { useGetProductsQuery } from '../slices/productsApiSlice'
 
 export default function HomeScreen() {
   const { data: products, isLoading, isError, error } = useGetProductsQuery()

@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import { BsChevronLeft } from 'react-icons/bs'
+import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 
 export default function ProductScreen() {
   const { id: productId } = useParams()
