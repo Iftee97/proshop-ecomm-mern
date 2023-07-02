@@ -1,35 +1,23 @@
-import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button, Spinner } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import { BsChevronLeft } from 'react-icons/bs'
 import Rating from '../components/Rating'
-import axios from 'axios'
+import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 
 export default function ProductScreen() {
-  const [product, setProduct] = useState({})
   const { id: productId } = useParams()
+  const { data: product, isLoading, isError } = useGetProductDetailsQuery(productId)
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${productId}`)
-      setProduct(data)
-    }
-    fetchProduct()
-  }, [productId])
-
-  console.log('product: >>>>>>>>>', product)
-  const { image, name, rating, numReviews, price, description, countInStock } = product
-
-  return (
-    <>
-      <Link to='/' className='btn btn-light my-3 inline-block'>
-        <span className='d-flex align-items-center'>
-          <BsChevronLeft />
-          <span className='ms-1'>
-            Go Back
-          </span>
-        </span>
-      </Link>
+  let content = null
+  if (isLoading) {
+    content = <h2>Loading...</h2>
+  }
+  if (isError) {
+    content = <h2>Error... Could not fetch data for this product</h2>
+  }
+  if (!isLoading && !isError && product) {
+    const { name, image, rating, numReviews, price, description, countInStock } = product
+    content = (
       <Row>
         <Col md={5}>
           <Image src={image} alt={name} fluid />
@@ -85,6 +73,20 @@ export default function ProductScreen() {
           </Card>
         </Col>
       </Row>
+    )
+  }
+
+  return (
+    <>
+      <Link to='/' className='btn btn-light my-3 inline-block'>
+        <span className='d-flex align-items-center'>
+          <BsChevronLeft />
+          <span className='ms-1'>
+            Go Back
+          </span>
+        </span>
+      </Link>
+      {content}
     </>
   )
 }
