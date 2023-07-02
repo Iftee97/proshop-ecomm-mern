@@ -18,9 +18,11 @@ export default function Rating({ value, text }) {
       <span>
         {value >= 5 ? <FaStar /> : value >= 4.5 ? <FaStarHalfAlt /> : <FaRegStar />}
       </span>
-      <span className='rating-text'>
-        {text && text}
-      </span>
+      {text && (
+        <span className='rating-text'>
+          {text}
+        </span>
+      )}
     </div>
   )
 }
