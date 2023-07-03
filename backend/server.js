@@ -3,6 +3,7 @@ import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,6 +16,7 @@ connectDB();
 // middlewares
 app.use(express.json()); // allows us to accept JSON data in the body
 app.use(express.urlencoded({ extended: true })); // allows us to accept form data in the body
+app.use(cookieParser()); // allows us to accept cookies
 
 // routes
 app.use('/api/products', productRoutes);
