@@ -40,7 +40,7 @@ export default function CartScreen() {
           <ListGroup variant='flush'>
             {cartItems.map((item) => (
               <ListGroup.Item key={item._id}>
-                <Row>
+                <Row className='d-flex align-items-center'>
                   <Col md={2}>
                     <Image
                       src={item.image}
