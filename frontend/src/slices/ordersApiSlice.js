@@ -24,6 +24,8 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+
+    // admin endpoints
     getOrders: builder.query({
       query: () => ({
         url: ORDERS_URL,

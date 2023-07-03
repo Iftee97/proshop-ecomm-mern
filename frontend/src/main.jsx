@@ -15,6 +15,7 @@ import RegisterScreen from './screens/RegisterScreen.jsx'
 import ShippingScreen from './screens/ShippingScreen.jsx'
 import PaymentScreen from './screens/PaymentScreen.jsx'
 import PlaceOrderScreen from './screens/PlaceOrderScreen.jsx'
+import OrderScreen from './screens/OrderScreen.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import { ToastContainer } from 'react-toastify'
 import { Provider } from 'react-redux'
@@ -41,6 +42,9 @@ const router = createBrowserRouter(
       </Route>
       <Route path='' element={<PrivateRoute />}>
         <Route path='/place-order' element={<PlaceOrderScreen />} />
+      </Route>
+      <Route path='' element={<PrivateRoute />}>
+        <Route path='/order/:id' element={<OrderScreen />} />
       </Route>
     </Route>
   )

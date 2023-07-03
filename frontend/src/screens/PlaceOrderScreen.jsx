@@ -12,6 +12,8 @@ import Loader from '../components/Loader'
 export default function PlaceOrderScreen() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  // const cart = useSelector(state => state.cart)
+  // console.log('cart: >>>>>>>>', cart)
   const {
     shippingAddress,
     paymentMethod,
@@ -21,8 +23,6 @@ export default function PlaceOrderScreen() {
     taxPrice,
     totalPrice
   } = useSelector(state => state.cart)
-  // const cart = useSelector(state => state.cart)
-  // console.log('cart: >>>>>>>>', cart)
 
   const [createOrder, { isLoading, error }] = useCreateOrderMutation()
 
@@ -46,7 +46,6 @@ export default function PlaceOrderScreen() {
         totalPrice
       }).unwrap()
       dispatch(clearCartItems())
-      console.log('createOrder res: >>>>>>>>', res)
       navigate(`/order/${res._id}`)
     } catch (err) {
       console.log('err: >>>>>>', err)
