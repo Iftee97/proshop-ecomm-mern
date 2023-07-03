@@ -1,5 +1,6 @@
 import express from 'express';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import dotenv from 'dotenv';
@@ -12,11 +13,12 @@ const PORT = process.env.PORT || 4000;
 connectDB();
 
 // middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // allows us to accept JSON data in the body
+app.use(express.urlencoded({ extended: true })); // allows us to accept form data in the body
 
 // routes
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 // home route
 app.get('/', (req, res) => {
