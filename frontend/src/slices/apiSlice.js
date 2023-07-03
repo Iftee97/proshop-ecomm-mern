@@ -8,6 +8,6 @@ export const apiSlice = createApi({
   baseQuery,
   tagTypes: ['Product', 'Order', 'User'],
   endpoints: (builder) => ({
-    // we'll inject the endpoints from other api slice files
+    // we'll inject other api endpoints here, from separate files.
   }),
 })
