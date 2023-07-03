@@ -111,7 +111,6 @@ export default function CartScreen() {
               <Button
                 type='button'
                 variant='dark'
-                className='btn btn-dark'
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >

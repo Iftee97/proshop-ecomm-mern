@@ -101,7 +101,6 @@ export default function ProductScreen() {
                 <Button
                   type='button'
                   variant='dark'
-                  className='btn btn-dark'
                   disabled={countInStock === 0}
                   onClick={addToCartHandler}
                 >
