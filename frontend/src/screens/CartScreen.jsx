@@ -11,11 +11,11 @@ export default function CartScreen() {
   const { cartItems } = useSelector(state => state.cart)
 
   const addToCartHandler = (product, qty) => {
-    dispatch(addToCart({ ...product, qty }));
+    dispatch(addToCart({ ...product, qty }))
   }
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id))
   }
 
   const checkoutHandler = () => {
