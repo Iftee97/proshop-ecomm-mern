@@ -1,14 +1,24 @@
-import { useSelector } from 'react-redux'
-import { Navbar, Nav, Container, Badge } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../slices/authSlice'
+import { useLogoutMutation } from '../slices/usersApiSlice'
+import { Navbar, Nav, NavDropdown, Container, Badge } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { FaShoppingCart, FaUser } from 'react-icons/fa'
 import logo from '/logo.png' // imported from public folder
 
 export default function Header() {
+  const dispatch = useDispatch()
   const { cartItems } = useSelector(state => state.cart)
+  const { userInfo } = useSelector(state => state.auth)
+  const [logoutApiCall] = useLogoutMutation()
 
   const getCartItemsCount = () => {
     return cartItems.reduce((qty, item) => qty + item.qty, 0)
+  }
+
+  const logoutHandler = async () => {
+    await logoutApiCall().unwrap()
+    dispatch(logout())
   }
 
   return (
@@ -24,27 +34,40 @@ export default function Header() {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
-              <LinkContainer to='/cart'>
-                <Nav.Link className='d-flex align-items-center'>
-                  <FaShoppingCart className='me-1' />
-                  <span>Cart</span>
-                  {cartItems.length > 0 && (
-                    <Badge pill bg='success' style={{ marginLeft: '5px' }}>
-                      {getCartItemsCount()}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to='/login'>
-                <Nav.Link className='d-flex align-items-center'>
-                  <FaUser className='me-1' />
-                  <span>Sign In</span>
-                </Nav.Link>
-              </LinkContainer>
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id='username'>
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <>
+                  <LinkContainer to='/cart'>
+                    <Nav.Link className='d-flex align-items-center'>
+                      <FaShoppingCart className='me-1' />
+                      <span>Cart</span>
+                      {cartItems.length > 0 && (
+                        <Badge pill bg='success' style={{ marginLeft: '5px' }}>
+                          {getCartItemsCount()}
+                        </Badge>
+                      )}
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/login'>
+                    <Nav.Link className='d-flex align-items-center'>
+                      <FaUser className='me-1' />
+                      <span>Sign In</span>
+                    </Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
-    </header>
+      </Navbar >
+    </header >
   )
 }
