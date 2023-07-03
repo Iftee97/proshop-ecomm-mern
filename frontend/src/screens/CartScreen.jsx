@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, removeFromCart } from '../slices/cartSlice'
+import { addToCart, removeFromCart, clearCartItems } from '../slices/cartSlice'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import { FaTrash } from 'react-icons/fa'
 import Message from '../components/Message'
@@ -16,6 +16,10 @@ export default function CartScreen() {
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
+  }
+
+  const clearCartHandler = () => {
+    dispatch(clearCartItems())
   }
 
   const checkoutHandler = () => {
@@ -78,6 +82,15 @@ export default function CartScreen() {
                 </Row>
               </ListGroup.Item>
             ))}
+            <ListGroup.Item>
+              <Button
+                type='button'
+                variant='link'
+                onClick={clearCartHandler}
+              >
+                Clear Cart
+              </Button>
+            </ListGroup.Item>
           </ListGroup>
         )}
       </Col>
