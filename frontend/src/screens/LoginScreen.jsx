@@ -40,7 +40,7 @@ export default function LoginScreen() {
   return (
     <FormContainer>
       <h1>Sign In</h1>
-      <form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler}>
         <Form.Group controlId='email' className='my-3'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -69,7 +69,7 @@ export default function LoginScreen() {
         >
           {isLoading ? 'Signing in...' : 'Sign In'}
         </Button>
-      </form>
+      </Form>
       {isLoading && <Loader />}
       <Row className='mt-3'>
         <Col>

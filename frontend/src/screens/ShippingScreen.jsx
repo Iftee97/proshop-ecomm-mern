@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingAddress } from '../slices/cartSlice'
 import { Form, Button } from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
+import CheckoutSteps from '../components/CheckoutSteps'
 
 export default function ShippingScreen() {
   const dispatch = useDispatch()
@@ -24,8 +25,9 @@ export default function ShippingScreen() {
 
   return (
     <FormContainer>
+      <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
-      <form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler}>
         <Form.Group controlId='address' className='my-2'>
           <Form.Label>Address</Form.Label>
           <Form.Control
@@ -69,7 +71,7 @@ export default function ShippingScreen() {
         <Button type='submit' variant='dark' className='my-2'>
           Continue
         </Button>
-      </form>
+      </Form>
     </FormContainer>
   )
 }

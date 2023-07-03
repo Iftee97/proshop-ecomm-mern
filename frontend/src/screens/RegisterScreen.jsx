@@ -46,7 +46,7 @@ export default function RegisterScreen() {
   return (
     <FormContainer>
       <h1>Sign Up</h1>
-      <form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler}>
         <Form.Group controlId='name' className='my-3'>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -95,7 +95,7 @@ export default function RegisterScreen() {
         >
           {isLoading ? 'Signing up...' : 'Sign Up'}
         </Button>
-      </form>
+      </Form>
       {isLoading && <Loader />}
       <Row className='mt-3'>
         <Col>

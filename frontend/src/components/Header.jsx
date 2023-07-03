@@ -34,6 +34,17 @@ export default function Header() {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
+              <LinkContainer to='/cart'>
+                <Nav.Link className='d-flex align-items-center'>
+                  <FaShoppingCart className='me-1' />
+                  <span>Cart</span>
+                  {cartItems.length > 0 && (
+                    <Badge pill bg='success' style={{ marginLeft: '5px' }}>
+                      {getCartItemsCount()}
+                    </Badge>
+                  )}
+                </Nav.Link>
+              </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id='username'>
                   <LinkContainer to='/profile'>
@@ -44,30 +55,17 @@ export default function Header() {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <>
-                  <LinkContainer to='/cart'>
-                    <Nav.Link className='d-flex align-items-center'>
-                      <FaShoppingCart className='me-1' />
-                      <span>Cart</span>
-                      {cartItems.length > 0 && (
-                        <Badge pill bg='success' style={{ marginLeft: '5px' }}>
-                          {getCartItemsCount()}
-                        </Badge>
-                      )}
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to='/login'>
-                    <Nav.Link className='d-flex align-items-center'>
-                      <FaUser className='me-1' />
-                      <span>Sign In</span>
-                    </Nav.Link>
-                  </LinkContainer>
-                </>
+                <LinkContainer to='/login'>
+                  <Nav.Link className='d-flex align-items-center'>
+                    <FaUser className='me-1' />
+                    <span>Sign In</span>
+                  </Nav.Link>
+                </LinkContainer>
               )}
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar >
-    </header >
+      </Navbar>
+    </header>
   )
 }

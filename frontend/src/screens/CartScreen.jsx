@@ -82,7 +82,7 @@ export default function CartScreen() {
                 </Row>
               </ListGroup.Item>
             ))}
-            <ListGroup.Item>
+            {/* <ListGroup.Item>
               <Button
                 type='button'
                 variant='link'
@@ -90,7 +90,7 @@ export default function CartScreen() {
               >
                 Clear Cart
               </Button>
-            </ListGroup.Item>
+            </ListGroup.Item> */}
           </ListGroup>
         )}
       </Col>
