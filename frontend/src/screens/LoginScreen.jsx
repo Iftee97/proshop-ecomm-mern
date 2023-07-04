@@ -31,7 +31,6 @@ export default function LoginScreen() {
     try {
       const res = await login({ email, password }).unwrap()
       console.log('login res: >>>>>>>>', res)
-      
       dispatch(setCredentials({ ...res }))
       navigate(redirect)
     } catch (err) {

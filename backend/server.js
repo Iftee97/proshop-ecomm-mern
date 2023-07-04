@@ -20,7 +20,8 @@ app.use(express.json()); // allows us to accept JSON data in the body
 app.use(express.urlencoded({ extended: true })); // allows us to accept form data in the body
 app.use(cookieParser()); // allows us to accept cookies
 app.use(cors({
-  origin: 'http://localhost:3000' || 'https://proshop-ecomm-mern.vercel.app' || '*', // frontend development | production server
+  // origin: 'http://localhost:3000' || '*', // frontend development server
+  origin: 'https://proshop-ecomm-mern.vercel.app' || '*', // frontend production server
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true,
 }));
