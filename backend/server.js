@@ -22,7 +22,8 @@ app.use(cookieParser()); // allows us to accept cookies
 app.use(cors({
   // origin: 'http://localhost:3000' || '*', // frontend development server
   origin: 'https://proshop-ecomm-mern.vercel.app' || '*', // frontend production server
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  credentials: true,
 }));
 
 // routes
