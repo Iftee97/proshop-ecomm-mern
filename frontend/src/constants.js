@@ -1,5 +1,13 @@
-export const BASE_URL = '' // keep empty strings for dev mode because we're using a proxy in vite config, enter the full production backend server url for production
-export const PRODUCTS_URL = '/api/products'
-export const USERS_URL = '/api/users'
-export const ORDERS_URL = '/api/orders'
-export const PAYPAL_URL = '/api/config/paypal'
+// // dev urls:
+// export const BASE_URL = ''
+// export const PRODUCTS_URL = '/api/products'
+// export const USERS_URL = '/api/users'
+// export const ORDERS_URL = '/api/orders'
+// export const PAYPAL_URL = '/api/config/paypal'
+
+// // prod urls:
+export const BASE_URL = `${import.meta.env.VITE_APP_PROD_BACKEND_SERVER_BASE_URL}`
+export const PRODUCTS_URL = `${import.meta.env.VITE_APP_PROD_BACKEND_SERVER_BASE_URL}/api/products`
+export const USERS_URL = `${import.meta.env.VITE_APP_PROD_BACKEND_SERVER_BASE_URL}/api/users`
+export const ORDERS_URL = `${import.meta.env.VITE_APP_PROD_BACKEND_SERVER_BASE_URL}/api/orders`
+export const PAYPAL_URL = `${import.meta.env.VITE_APP_PROD_BACKEND_SERVER_BASE_URL}/api/config/paypal`
