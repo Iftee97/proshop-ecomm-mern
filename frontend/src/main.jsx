@@ -20,6 +20,7 @@ import PrivateRoute from './components/PrivateRoute.jsx'
 import { ToastContainer } from 'react-toastify'
 import { Provider } from 'react-redux'
 import { store } from './store.js'
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import './assets/styles/bootstrap.custom.css'
@@ -53,7 +54,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PayPalScriptProvider deferLoading={true}>
+        <RouterProvider router={router} />
+      </PayPalScriptProvider>
       <ToastContainer />
     </Provider>
   </React.StrictMode>
