@@ -7,6 +7,7 @@ import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { toast } from 'react-toastify'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import moment from 'moment'
 
 export default function OrderScreen() {
   const { id: orderId } = useParams()
@@ -73,7 +74,7 @@ export default function OrderScreen() {
         ],
       })
       .then((orderID) => {
-        return orderID;
+        return orderID
       })
   }
 
@@ -100,6 +101,11 @@ export default function OrderScreen() {
 
   const onError = (err) => {
     toast.error(err.message)
+  }
+
+  const formatDate = (dateString) => {
+    const date = moment.utc(dateString)
+    return date.format('MMMM D, YYYY, h:mm:ss A')
   }
 
   return isLoading ? (
@@ -134,7 +140,7 @@ export default function OrderScreen() {
               </p>
               {order.isDelivered ? (
                 <Message variant='success'>
-                  Delivered on {order.deliveredAt}
+                  Delivered on {formatDate(order.deliveredAt)}
                 </Message>
               ) : (
                 <Message variant='danger'>
@@ -150,7 +156,7 @@ export default function OrderScreen() {
               </p>
               {order.isPaid ? (
                 <Message variant='success'>
-                  Paid on {order.paidAt}
+                  Paid on {formatDate(order.paidAt)}
                 </Message>
               ) : (
                 <Message variant='danger'>

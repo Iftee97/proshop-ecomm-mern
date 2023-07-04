@@ -31,6 +31,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     // // we don't need a getUserDetails query because we're already storing the user info in the auth slice
+    // // which we can get from anywhere in the app using the useSelector hook
     // getUserDetails: builder.query({
     //   query: () => ({
     //     url: `${USERS_URL}/profile`,
