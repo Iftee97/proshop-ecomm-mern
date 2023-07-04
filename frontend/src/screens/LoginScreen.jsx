@@ -22,7 +22,7 @@ export default function LoginScreen() {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      // navigate(redirect)
     }
   }, [userInfo, redirect])
 
@@ -30,6 +30,8 @@ export default function LoginScreen() {
     e.preventDefault()
     try {
       const res = await login({ email, password }).unwrap()
+      console.log('login res: >>>>>>>>', res)
+      
       dispatch(setCredentials({ ...res }))
       navigate(redirect)
     } catch (err) {
