@@ -80,7 +80,7 @@ export const {
   useLogoutMutation,
   useUpdateProfileMutation,
 
-  // admin endpoints hooks:
+  // admin hooks:
   useGetUsersQuery,
   useGetSingleUserQuery,
   useUpdateUserMutation,
