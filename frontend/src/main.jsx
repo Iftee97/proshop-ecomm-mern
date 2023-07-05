@@ -18,6 +18,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen.jsx'
 import OrderScreen from './screens/OrderScreen.jsx'
 import ProfileScreen from './screens/ProfileScreen.jsx'
 import OrderListScreen from './screens/admin/OrderListScreen.jsx'
+import ProductListScreen from './screens/admin/ProductListScreen.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import AdminRoute from './components/AdminRoute.jsx'
 import { ToastContainer } from 'react-toastify'
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
 
       <Route path='' element={<AdminRoute />}>
         <Route path='/admin/order-list' element={<OrderListScreen />} />
+        <Route path='/admin/product-list' element={<ProductListScreen />} />
       </Route>
     </Route>
   )

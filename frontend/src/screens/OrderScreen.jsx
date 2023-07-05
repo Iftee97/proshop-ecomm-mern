@@ -252,11 +252,7 @@ export default function OrderScreen() {
                     <Loader />
                   ) : (
                     <div>
-                      {/* <Button
-                        variant='dark'
-                        onClick={onApproveTest}
-                        style={{ marginBottom: '10px' }}
-                      >
+                      {/* <Button variant='dark' onClick={onApproveTest} style={{ marginBottom: '10px' }}>
                         test pay order
                       </Button> */}
                       <div>
@@ -275,7 +271,7 @@ export default function OrderScreen() {
               {loadingDeliver && <Loader />}
               {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <ListGroup.Item>
-                  <Button type='button' variant='primary' onClick={deliverOrderHandler}>
+                  <Button variant='primary' onClick={deliverOrderHandler}>
                     Mark As Delivered
                   </Button>
                 </ListGroup.Item>
