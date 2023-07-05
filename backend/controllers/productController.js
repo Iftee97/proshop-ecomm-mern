@@ -41,7 +41,7 @@ const createProduct = asyncHandler(async (req, res) => {
   res.status(201).json(createdProduct);
 });
 
-// @desc    Update a products
+// @desc    Update a product
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
@@ -63,9 +63,25 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete a product
+// @route   DELETE /api/products/:id
+// @access  Private/Admin
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    // await product.remove();
+    await Product.deleteOne({ _id: product._id });
+    res.json({ message: 'Product removed successfully' });
+  } else {
+    res.status(404);
+    throw new Error('Resource not found');
+  }
+});
+
 export {
   getProducts,
   getProductById,
   createProduct,
   updateProduct,
+  deleteProduct,
 };

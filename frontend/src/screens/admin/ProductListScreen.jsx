@@ -1,7 +1,8 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
-import { useGetProductsQuery, useCreateProductMutation } from '../../slices/productsApiSlice'
+import { useGetProductsQuery, useCreateProductMutation, useDeleteProductMutation } from '../../slices/productsApiSlice'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import { toast } from 'react-toastify'
@@ -9,20 +10,39 @@ import { toast } from 'react-toastify'
 export default function ProductListScreen() {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery()
   const [createProduct, { isLoading: createProductLoading, error: createProductError }] = useCreateProductMutation()
+  const [deleteProduct, { isLoading: deleteProductLoading, error: deleteProductError }] = useDeleteProductMutation()
+
+  useEffect(() => {
+    if (createProductError) {
+      toast.error(createProductError?.data?.message || createProductError.error)
+    }
+    if (deleteProductError) {
+      toast.error(deleteProductError?.data?.message || deleteProductError.error)
+    }
+  }, [createProductError, deleteProductError])
 
   const createProductHandler = async () => {
     if (window.confirm('Are you sure you want to create a new product?')) {
       try {
         await createProduct()
         refetch()
+        toast.success('Product created successfully')
       } catch (err) {
         toast.error(err?.data?.message || err.error)
       }
     }
   }
 
-  const deleteHandler = (id) => {
-    console.log('deleteHandler() fired for product with id: ', id)
+  const deleteHandler = async (id) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      try {
+        await deleteProduct(id)
+        refetch()
+        toast.success('Product deleted successfully')
+      } catch (err) {
+        toast.error(err?.data?.message || err.error)
+      }
+    }
   }
 
   return (
@@ -46,6 +66,7 @@ export default function ProductListScreen() {
         </Col>
       </Row>
       {createProductLoading && <Loader />}
+      {deleteProductLoading && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (

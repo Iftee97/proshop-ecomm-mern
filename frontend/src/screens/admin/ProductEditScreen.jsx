@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { BsChevronLeft } from 'react-icons/bs'
-import { useUpdateProductMutation, useGetProductDetailsQuery } from '../../slices/productsApiSlice'
+import { useUpdateProductMutation, useGetProductDetailsQuery, useUploadProductImageMutation } from '../../slices/productsApiSlice'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
@@ -20,6 +20,7 @@ export default function ProductEditScreen() {
   const [description, setDescription] = useState('')
   const { data: product, isLoading, error, refetch } = useGetProductDetailsQuery(productId)
   const [updateProduct, { isLoading: updateProductLoading }] = useUpdateProductMutation()
+  const [uploadProductImage, { isLoading: uploadImageLoading }] = useUploadProductImageMutation()
 
   useEffect(() => {
     if (product) {
@@ -32,6 +33,18 @@ export default function ProductEditScreen() {
       setDescription(product.description)
     }
   }, [product])
+
+  const uploadImageHandler = async (e) => {
+    const formData = new FormData()
+    formData.append('image', e.target.files[0])
+    try {
+      const res = await uploadProductImage(formData).unwrap()
+      toast.success(res.message)
+      setImage(res.image)
+    } catch (err) {
+      toast.error(err?.data?.message || err.error)
+    }
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault()
@@ -95,16 +108,21 @@ export default function ProductEditScreen() {
                 required
               />
             </Form.Group>
-            {/* <Form.Group controlId='image' className='my-2'>
+            <Form.Group controlId='image' className='my-2'>
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Enter image URL'
+                placeholder='Enter image url'
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
-                required
               />
-            </Form.Group> */}
+              <Form.Control
+                type='file'
+                label='Choose Image'
+                onChange={uploadImageHandler}
+              />
+              {uploadImageLoading && <Loader />}
+            </Form.Group>
             <Form.Group controlId='brand' className='my-2'>
               <Form.Label>Brand</Form.Label>
               <Form.Control

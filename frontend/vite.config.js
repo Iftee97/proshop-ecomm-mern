@@ -12,6 +12,10 @@ export default defineConfig({
         // target: 'https://proshop-ecomm-mern-production.up.railway.app', // prod backend server (deployed on Railway)
         changeOrigin: true,
       },
+      '/uploads': {
+        target: 'http://localhost:4000', // dev backend server, acts as proxy
+        // target: 'https://proshop-ecomm-mern-production.up.railway.app', // prod backend server (deployed on Railway)
+      }
     },
   },
 })
