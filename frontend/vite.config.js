@@ -8,8 +8,8 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        // target: 'http://localhost:4000', // dev backend server, acts as proxy
-        target: 'https://proshop-ecomm-mern-production.up.railway.app', // prod backend server (deployed on Railway)
+        target: 'http://localhost:4000', // dev backend server, acts as proxy
+        // target: 'https://proshop-ecomm-mern-production.up.railway.app', // prod backend server (deployed on Railway)
         changeOrigin: true,
       },
     },
