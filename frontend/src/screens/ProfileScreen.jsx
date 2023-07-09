@@ -112,6 +112,10 @@ export default function ProfileScreen() {
           <Message variant='danger'>
             {error?.data?.message || error.error}
           </Message>
+        ) : orders.length === 0 ? (
+          <Message variant='info'>
+            No orders found
+          </Message>
         ) : (
           <Table striped hover responsive className='table-sm'>
             <thead>
