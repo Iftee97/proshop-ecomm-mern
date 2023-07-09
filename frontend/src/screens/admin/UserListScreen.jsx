@@ -11,7 +11,7 @@ export default function UserListScreen() {
   const [deleteUser, { isLoading: deleteUserLoading }] = useDeleteUserMutation()
 
   const deleteHandler = async (id) => {
-    if (window.confirm('Are you sure')) {
+    if (window.confirm('Are you sure you want to delete this user?')) {
       try {
         await deleteUser(id)
         refetch()
