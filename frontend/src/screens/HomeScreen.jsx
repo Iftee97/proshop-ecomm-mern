@@ -6,7 +6,7 @@ import Message from '../components/Message'
 
 export default function HomeScreen() {
   const { data: products, isLoading, isError, error } = useGetProductsQuery()
-  console.log('products: >>>>>>>>>', products)
+  // console.log('products: >>>>>>>>>', products)
 
   let content = null
   if (isLoading) {

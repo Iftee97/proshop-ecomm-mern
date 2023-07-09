@@ -22,12 +22,14 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid Credentials');
   }
 
-  generateToken(res, user._id); // generate JWT and set cookie
+  const token = generateToken(res, user._id); // generate JWT and set cookie
+  console.log('login token: >>>>>>>>', token);
   res.status(201).json({
     _id: user._id,
     name: user.name,
     email: user.email,
-    isAdmin: user.isAdmin
+    isAdmin: user.isAdmin,
+    token
   });
 });
 
@@ -52,12 +54,14 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword
   });
   if (user) {
-    generateToken(res, user._id); // generate JWT and set cookie
+    const token = generateToken(res, user._id); // generate JWT and set cookie
+    console.log('register token: >>>>>>>>', token);
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
+      token
     });
   } else {
     res.status(400);
@@ -109,10 +113,13 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 
     const updatedUser = await user.save();
+    const token = generateToken(res, updatedUser._id);
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token
     });
   } else {
     res.status(404);

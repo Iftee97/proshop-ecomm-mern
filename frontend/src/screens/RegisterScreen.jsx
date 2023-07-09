@@ -7,6 +7,7 @@ import { setCredentials } from '../slices/authSlice'
 import { toast } from 'react-toastify'
 import FormContainer from '../components/FormContainer'
 import Loader from '../components/Loader'
+import Cookies from 'js-cookie'
 
 export default function RegisterScreen() {
   const [name, setName] = useState('')
@@ -35,6 +36,8 @@ export default function RegisterScreen() {
     } else {
       try {
         const res = await register({ name, email, password }).unwrap()
+        console.log('register res: >>>>>>>>', res)
+        Cookies.set('jwt', res.token, { expires: 30 })
         dispatch(setCredentials({ ...res }))
         navigate(redirect)
       } catch (err) {

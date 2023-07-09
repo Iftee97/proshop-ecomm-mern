@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../slices/authSlice'
 import { useLogoutMutation } from '../slices/usersApiSlice'
@@ -5,12 +6,14 @@ import { Navbar, Nav, NavDropdown, Container, Badge } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { FaShoppingCart, FaUser } from 'react-icons/fa'
 import logo from '/logo.png' // imported from public folder
+import Cookies from 'js-cookie'
 
 export default function Header() {
   const dispatch = useDispatch()
   const { cartItems } = useSelector(state => state.cart)
   const { userInfo } = useSelector(state => state.auth)
   const [logoutApiCall] = useLogoutMutation()
+  const navigate = useNavigate()
 
   const getCartItemsCount = () => {
     return cartItems.reduce((qty, item) => qty + item.qty, 0)
@@ -18,7 +21,9 @@ export default function Header() {
 
   const logoutHandler = async () => {
     await logoutApiCall().unwrap()
+    Cookies.remove('jwt')
     dispatch(logout())
+    navigate('/')
   }
 
   return (

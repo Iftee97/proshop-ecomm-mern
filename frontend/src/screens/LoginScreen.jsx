@@ -7,6 +7,7 @@ import { setCredentials } from '../slices/authSlice'
 import { toast } from 'react-toastify'
 import FormContainer from '../components/FormContainer'
 import Loader from '../components/Loader'
+import Cookies from 'js-cookie'
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('')
@@ -31,6 +32,7 @@ export default function LoginScreen() {
     try {
       const res = await login({ email, password }).unwrap()
       console.log('login res: >>>>>>>>', res)
+      Cookies.set('jwt', res.token, { expires: 30 })
       dispatch(setCredentials({ ...res }))
       navigate(redirect)
     } catch (err) {
