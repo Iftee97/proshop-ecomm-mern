@@ -8,6 +8,7 @@ import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import GoBackBtn from '../components/GoBackBtn'
+import Meta from '../components/Meta'
 
 export default function ProductScreen() {
   const [qty, setQty] = useState(1)
@@ -37,6 +38,7 @@ export default function ProductScreen() {
     content = (
       <>
         <GoBackBtn />
+        <Meta title={product.name} description={product.description} />
         <Row>
           <Col md={5}>
             <Image src={image} alt={name} fluid />

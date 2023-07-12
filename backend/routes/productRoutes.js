@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getProducts,
+  getTopProducts,
   getProductById,
   createProduct,
   updateProduct,
@@ -12,6 +13,7 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 router.get('/', getProducts); // get all products
+router.get('/top', getTopProducts); // get top products
 router.get('/:id', getProductById); // get single product
 router.post('/', protect, admin, createProduct); // create product
 router.post('/:id/reviews', protect, createProductReview); // create new review
