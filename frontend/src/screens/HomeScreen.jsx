@@ -58,7 +58,6 @@ export default function HomeScreen() {
 
   return (
     <>
-      <h1>Latest Products</h1>
       {content}
     </>
   )
