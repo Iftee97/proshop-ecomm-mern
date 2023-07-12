@@ -1,12 +1,16 @@
+import { useParams } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Paginate from '../components/Paginate'
+import GoBackBtn from '../components/GoBackBtn'
 
 export default function HomeScreen() {
-  const { data: products, isLoading, isError, error } = useGetProductsQuery()
-  // console.log('products: >>>>>>>>>', products)
+  const { pageNumber, keyword } = useParams()
+  const { data, isLoading, isError, error } = useGetProductsQuery({ pageNumber, keyword })
+  const { page, pages, products } = data || {}
 
   let content = null
   if (isLoading) {
@@ -24,13 +28,21 @@ export default function HomeScreen() {
   }
   if (!isLoading && !isError && products?.length > 0) {
     content = (
-      <Row>
-        {products.map((product, index) => (
-          <Col key={product._id || index} sm={12} md={6} lg={4} xl={3}>
-            <Product product={product} />
-          </Col>
-        ))}
-      </Row>
+      <>
+        {keyword && <GoBackBtn />}
+        <Row>
+          {products.map((product, index) => (
+            <Col key={product._id || index} sm={12} md={6} lg={4} xl={3}>
+              <Product product={product} />
+            </Col>
+          ))}
+        </Row>
+        <Paginate
+          pages={pages}
+          page={page}
+          keyword={keyword ? keyword : ''}
+        />
+      </>
     )
   }
 

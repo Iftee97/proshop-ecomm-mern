@@ -1,14 +1,17 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { useGetProductsQuery, useCreateProductMutation, useDeleteProductMutation } from '../../slices/productsApiSlice'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
+import Paginate from '../../components/Paginate'
 import { toast } from 'react-toastify'
 
 export default function ProductListScreen() {
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery()
+  const { pageNumber } = useParams()
+  const { data, isLoading, error, refetch } = useGetProductsQuery({ pageNumber })
+  const { page, pages, products } = data || {}
   const [createProduct, { isLoading: createProductLoading, error: createProductError }] = useCreateProductMutation()
   const [deleteProduct, { isLoading: deleteProductLoading, error: deleteProductError }] = useDeleteProductMutation()
 
@@ -118,6 +121,7 @@ export default function ProductListScreen() {
               ))}
             </tbody>
           </Table>
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>

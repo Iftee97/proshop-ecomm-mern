@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import { BsChevronLeft } from 'react-icons/bs'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
+import GoBackBtn from '../../components/GoBackBtn'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
-import {
-  useGetSingleUserQuery,
-  useUpdateUserMutation,
-} from '../../slices/usersApiSlice'
+import { useGetSingleUserQuery, useUpdateUserMutation } from '../../slices/usersApiSlice'
 
 export default function UserEditScreen() {
   const { id: userId } = useParams()
@@ -43,14 +40,7 @@ export default function UserEditScreen() {
 
   return (
     <>
-      <Link to='/admin/user-list' className='btn btn-light my-3'>
-        <span className='d-flex align-items-center'>
-          <BsChevronLeft />
-          <span className='ms-1'>
-            Go Back
-          </span>
-        </span>
-      </Link>
+      <GoBackBtn />
       <FormContainer>
         <h1>Edit User</h1>
         {loadingUpdate && <Loader />}

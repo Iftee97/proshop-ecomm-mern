@@ -4,6 +4,7 @@ import { addToCart, removeFromCart, clearCartItems } from '../slices/cartSlice'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import { FaTrash } from 'react-icons/fa'
 import Message from '../components/Message'
+import GoBackBtn from '../components/GoBackBtn'
 
 export default function CartScreen() {
   const navigate = useNavigate()
@@ -18,9 +19,9 @@ export default function CartScreen() {
     dispatch(removeFromCart(id))
   }
 
-  const clearCartHandler = () => {
-    dispatch(clearCartItems())
-  }
+  // const clearCartHandler = () => {
+  //   dispatch(clearCartItems())
+  // }
 
   const checkoutHandler = () => {
     navigate('/login?redirect=shipping')
@@ -34,7 +35,8 @@ export default function CartScreen() {
         </h1>
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty <Link to='/'>Go Back</Link>
+            Your cart is empty <br />
+            <GoBackBtn />
           </Message>
         ) : (
           <ListGroup variant='flush'>

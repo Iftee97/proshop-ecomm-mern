@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import { BsChevronLeft } from 'react-icons/bs'
 import { useUpdateProductMutation, useGetProductDetailsQuery, useUploadProductImageMutation } from '../../slices/productsApiSlice'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
+import GoBackBtn from '../../components/GoBackBtn'
 import { toast } from 'react-toastify'
 
 export default function ProductEditScreen() {
@@ -69,14 +69,7 @@ export default function ProductEditScreen() {
 
   return (
     <>
-      <Link to='/admin/product-list' className='btn btn-light my-3'>
-        <span className='d-flex align-items-center'>
-          <BsChevronLeft />
-          <span className='ms-1'>
-            Go Back
-          </span>
-        </span>
-      </Link>
+      <GoBackBtn />
       <FormContainer>
         <h1>Edit Product</h1>
         {updateProductLoading && <Loader />}

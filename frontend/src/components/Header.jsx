@@ -7,6 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { FaShoppingCart, FaUser } from 'react-icons/fa'
 import logo from '/logo.png' // imported from public folder
 import Cookies from 'js-cookie'
+import SearchBox from './SearchBox'
 
 export default function Header() {
   const dispatch = useDispatch()
@@ -39,6 +40,7 @@ export default function Header() {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
+              <SearchBox />
               <LinkContainer to='/cart'>
                 <Nav.Link className='d-flex align-items-center'>
                   <FaShoppingCart className='me-1' />
